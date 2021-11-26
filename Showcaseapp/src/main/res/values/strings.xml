@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Movesense Showcase App</string>
+    <string name="app_name">Project Green Release</string>
 
     <string name="title_location_permission">Location permission</string>
     <string name="text_location_permission">Bluetooth LE scanning requires location permission</string>
@@ -48,8 +48,8 @@
     <string name="change_account">Change Account</string>
     <string name="log_in">Log In</string>
 
-    <string name="Movesense">Movesense</string>
-    <string name="Saved_Data">Saved Data</string>
+    <string name="Create_Shot">Create Shot</string>
+    <string name="Practice">Practice!</string>
     <string name="movesense_device_name">Movesense</string>
     <string name="dfu_device_name">DfuTarg</string>
     <string name="movesense_sw_version">Movesense Sw Version: </string>
