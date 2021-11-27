@@ -23,121 +23,8 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <LinearLayout
-                android:id="@+id/mainView_ll1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <RelativeLayout
-                    android:id="@+id/mainView_movesense_Ll"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@color/colorMainViewCardBackground"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_above="@id/mainView_movesense_text"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/movesense"
-                        app:srcCompat="@drawable/movesense" />
-
-                    <TextView
-                        android:id="@+id/mainView_movesense_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentBottom="true"
-                        android:background="#3d545252"
-                        android:gravity="center"
-                        android:padding="6dp"
-                        android:text="@string/Movesense"
-                        android:textColor="@color/colorText"
-                        android:textSize="12sp" />
-
-                    <RelativeLayout
-                        android:id="@+id/mainView_movesense_Ll"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginBottom="4dp"
-                        android:layout_weight="1"
-                        android:background="@color/colorMainViewCardBackground"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_above="@id/mainView_movesense_text"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/flash_circle"
-                            app:srcCompat="@android:drawable/ic_menu_add" />
-
-                        <TextView
-                            android:id="@+id/mainView_movesense_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentRight="true"
-                            android:layout_alignParentBottom="true"
-                            android:background="#3d545252"
-                            android:gravity="center"
-                            android:padding="6dp"
-                            android:text="@string/Create_Shot"
-                            android:textColor="@color/colorText"
-                            android:textSize="16sp" />
-
-                    </RelativeLayout>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/mainView_savedData_Ll"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@color/colorMainViewCardBackground"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_above="@id/mainView_savedData_text"
-                        android:layout_marginBottom="1dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/google_circles"
-                        app:srcCompat="@drawable/google_circles" />
-
-                    <TextView
-                        android:id="@+id/mainView_savedData_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentBottom="true"
-                        android:background="#3d545252"
-                        android:gravity="center"
-                        android:padding="6dp"
-                        android:text="@string/Create_Shot"
-                        android:textColor="@color/colorText"
-                        android:textSize="16sp" />
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
             <RelativeLayout
-                android:id="@+id/mainView_movesense_Ll"
+                android:id="@+id/mainView_practice_Ll"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="4dp"
@@ -149,9 +36,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_above="@id/mainView_movesense_text"
+                    android:layout_marginBottom="2dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/baseline_poll_24"
-                    app:srcCompat="@drawable/baseline_poll_24" />
+                    android:src="@drawable/google_circles"
+                    app:srcCompat="@drawable/google_circles" />
 
                 <TextView
                     android:id="@+id/mainView_movesense_text"
@@ -164,6 +52,40 @@
                     android:gravity="center"
                     android:padding="6dp"
                     android:text="@string/Practice"
+                    android:textColor="@color/colorText"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/mainView_savedData_Ll"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@color/colorMainViewCardBackground"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@id/mainView_savedData_text"
+                    android:layout_marginBottom="1dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/baseline_poll_24"
+                    app:srcCompat="@drawable/baseline_poll_24" />
+
+                <TextView
+                    android:id="@+id/mainView_savedData_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:background="#3d545252"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:text="@string/Stats"
                     android:textColor="@color/colorText"
                     android:textSize="16sp" />
 
