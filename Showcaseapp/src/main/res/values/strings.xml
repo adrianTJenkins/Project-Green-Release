@@ -48,6 +48,7 @@
     <string name="change_account">Change Account</string>
     <string name="log_in">Log In</string>
 
+    <string name="Movesense">Connect Movesense</string>
     <string name="Create_Shot">Create Shot</string>
     <string name="Practice">Practice!</string>
     <string name="movesense_device_name">Movesense</string>
