@@ -64,6 +64,7 @@ public class ImuActivity extends BaseActivity implements BleManager.IBleConnecti
     @BindView(R.id.connected_device_swVersion_textView) TextView mConnectedDeviceSwVersionTextView;
     @BindView(R.id.switchSubscription) SwitchCompat mSwitchSubscription;
     @BindView(R.id.spinner) Spinner spinner;
+    @BindView(R.id.text_feedback) TextView feedback;
     @BindView(R.id.linearacc_x_axis_textView) TextView mLinearaccXAxisTextView;
     @BindView(R.id.linearacc_y_axis_textView) TextView mLinearaccYAxisTextView;
     @BindView(R.id.linearacc_z_axis_textView) TextView mLinearaccZAxisTextView;
@@ -191,6 +192,13 @@ public class ImuActivity extends BaseActivity implements BleManager.IBleConnecti
                                 mMagnXAxisTextView.setText(String.format(Locale.getDefault(), "x: %.6f", imuModel.getBody().getArrayMagnl()[0].getX()));
                                 mMagnYAxisTextView.setText(String.format(Locale.getDefault(), "y: %.6f", imuModel.getBody().getArrayMagnl()[0].getY()));
                                 mMagnZAxisTextView.setText(String.format(Locale.getDefault(), "z: %.6f", imuModel.getBody().getArrayMagnl()[0].getZ()));
+                            }
+
+                            if (imuModel.getBody().getArrayGyro()[0].getY() < -1000) {
+                                feedback.setText("Shooting");
+                            }
+                            else {
+                                feedback.setText("");
                             }
 
                             int len = imuModel.getBody().getArrayAcc().length;

@@ -146,7 +146,6 @@ public class SensorListActivity extends BaseActivity implements View.OnClickList
         String sensorName = (String) v.getTag();
 
         subscriptions.clear();
-
         if (getString(R.string.led_name).equals(sensorName)) {
             startActivity(new Intent(SensorListActivity.this, LedTestActivity.class));
             return;
