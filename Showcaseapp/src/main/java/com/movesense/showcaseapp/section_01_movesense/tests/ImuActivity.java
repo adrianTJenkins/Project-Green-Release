@@ -54,6 +54,9 @@ public class ImuActivity extends BaseActivity implements BleManager.IBleConnecti
 
 
     private AlertDialog alertDialog;
+    private boolean inMotion = false;
+    private int motionTime = 0;
+    private int idleTime = 0;
 
     private final List<String> spinnerRates = new ArrayList<>();
     private String rate;
@@ -195,10 +198,33 @@ public class ImuActivity extends BaseActivity implements BleManager.IBleConnecti
                             }
 
                             if (imuModel.getBody().getArrayGyro()[0].getY() < -1000) {
-                                feedback.setText("Shooting");
+                                if (!inMotion) {
+                                    inMotion = true;
+                                }
+                                motionTime++;
                             }
                             else {
-                                feedback.setText("");
+                                if (inMotion) {
+                                    inMotion = false;
+                                    if (motionTime < 2) {
+                                        feedback.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+                                        feedback.setText("Your follow through was not long enough.");
+                                    }
+                                    else if (imuModel.getBody().getArrayAcc()[0].getX() < 74 || Math.abs(imuModel.getBody().getArrayAcc()[0].getZ()) < 74) {
+                                        feedback.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+                                        feedback.setText("Your release was too slow.");
+                                    }
+                                    else if (imuModel.getBody().getArrayAcc()[0].getX() > 80 || Math.abs(imuModel.getBody().getArrayAcc()[0].getZ()) > 80) {
+                                        feedback.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+                                        feedback.setText("Your release was too fast.");
+                                    }
+                                    else {
+                                        feedback.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+                                        feedback.setText("Perfect release.");
+                                    }
+                                }
+
+                                motionTime = 0;
                             }
 
                             int len = imuModel.getBody().getArrayAcc().length;
