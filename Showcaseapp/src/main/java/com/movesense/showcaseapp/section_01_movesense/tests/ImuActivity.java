@@ -54,9 +54,13 @@ public class ImuActivity extends BaseActivity implements BleManager.IBleConnecti
 
 
     private AlertDialog alertDialog;
-    private boolean inMotion = false;
-    private int motionTime = 0;
+    private boolean followThrough = false;
+    private double maxFlick = 0;
+    private int followThroughTime = 0;
     private int idleTime = 0;
+    private int magnThreshold = 10;
+    private int accThreshold = 20;
+    private int gyrThreshold = 100;
 
     private final List<String> spinnerRates = new ArrayList<>();
     private String rate;
@@ -197,34 +201,53 @@ public class ImuActivity extends BaseActivity implements BleManager.IBleConnecti
                                 mMagnZAxisTextView.setText(String.format(Locale.getDefault(), "z: %.6f", imuModel.getBody().getArrayMagnl()[0].getZ()));
                             }
 
-                            if (imuModel.getBody().getArrayGyro()[0].getY() < -1000) {
-                                if (!inMotion) {
-                                    inMotion = true;
+                            if (Math.abs(imuModel.getBody().getArrayGyro()[0].getY()) > maxFlick) {
+                                    maxFlick = Math.abs(imuModel.getBody().getArrayGyro()[0].getY());
                                 }
-                                motionTime++;
+
+                            if ((imuModel.getBody().getArrayMagnl()[0].getX() >= 18 - magnThreshold &&
+                                            imuModel.getBody().getArrayMagnl()[0].getX() <= 18 + magnThreshold) &&
+                                            (imuModel.getBody().getArrayMagnl()[0].getY() >= 0 - magnThreshold &&
+                                            imuModel.getBody().getArrayMagnl()[0].getY() <= 0 + magnThreshold) &&
+                                            (imuModel.getBody().getArrayMagnl()[0].getZ() >= -3 - magnThreshold &&
+                                            imuModel.getBody().getArrayMagnl()[0].getZ() <= -3 + magnThreshold)) {
+                                feedback.setTextColor(getResources().getColor(android.R.color.black));
+                                feedback.setText("Shot attempted!");
+                                if (!followThrough) {
+                                    followThrough = true;
+                                }
+                                followThroughTime++;
+
+
                             }
                             else {
-                                if (inMotion) {
-                                    inMotion = false;
-                                    if (motionTime < 2) {
-                                        feedback.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+                                if (followThrough) {
+                                    followThrough = false;
+                                    if (followThroughTime < 4) {
+                                        feedback.setTextColor(getResources().getColor(android.R.color.holo_orange_light));
                                         feedback.setText("Your follow through was not long enough.");
                                     }
-                                    else if (imuModel.getBody().getArrayAcc()[0].getX() < 74 || Math.abs(imuModel.getBody().getArrayAcc()[0].getZ()) < 74) {
-                                        feedback.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+                                    else if (maxFlick <= 1000 - gyrThreshold) {
+                                        feedback.setTextColor(getResources().getColor(android.R.color.holo_orange_light));
                                         feedback.setText("Your release was too slow.");
                                     }
-                                    else if (imuModel.getBody().getArrayAcc()[0].getX() > 80 || Math.abs(imuModel.getBody().getArrayAcc()[0].getZ()) > 80) {
-                                        feedback.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+                                    else if (maxFlick >= 1000 + gyrThreshold) {
+                                        feedback.setTextColor(getResources().getColor(android.R.color.holo_orange_light));
                                         feedback.setText("Your release was too fast.");
                                     }
                                     else {
-                                        feedback.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+                                        feedback.setTextColor(getResources().getColor(android.R.color.holo_green_light));
                                         feedback.setText("Perfect release.");
                                     }
                                 }
+                                else {
+                                    if (imuModel.getBody().getArrayGyro()[0].getY() <= -1000 + gyrThreshold && imuModel.getBody().getArrayGyro()[0].getY() >= -1000 - gyrThreshold) {
+                                        feedback.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+                                        feedback.setText("Way off.. fix your wrist flick!");
+                                    }
+                                }
 
-                                motionTime = 0;
+                                followThroughTime = 0;
                             }
 
                             int len = imuModel.getBody().getArrayAcc().length;
