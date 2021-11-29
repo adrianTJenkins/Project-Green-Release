@@ -16,7 +16,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Imu"
+            android:text="Free Throws"
             android:textSize="18sp"/>
 
     </LinearLayout>
@@ -219,5 +219,13 @@
             android:textSize="16sp"/>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="187dp"
+        android:gravity="center"
+        android:shadowColor="#000000"
+        android:textSize="24sp" />
 
 </LinearLayout>
